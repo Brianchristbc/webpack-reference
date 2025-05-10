@@ -97,3 +97,20 @@ Steps for implementing webpack
 7. run npm install --save-dev html-loader to detect and load image file paths in html template i.e < img> within src, this does not apply to url() images which are loaded by css-loader, add object containing test and loader into webpack config, add asset/resource rule for images manipulated to appear on the DOM using javascript
 8. run webpack-dev-server using npm install --save-dev webpack-dev-server to bundle code automatically without typing npx webpack, add in devtool and devserver into webpack config and run npx webpack serve, view site using http://localhost:8080/, if editing webpack config after starting webpack-dev-server, use ctrl+c in terminal to kill it then rerun npx webpack serve to apply new config
 9. Deploy code through github pages by making a new branch to deploy from git branch gh-pages, then check if anything needs committing with git status, then run git checkout gh-pages && git merge main --no-edit, then run npx webpack to bundle application into dist, then run git add dist -f && git commit -m "Deployment commit then git subtree push --prefix dist origin gh-pages then git checkout main in order. Lastly, change source branch to gh-pages in repo settings.
+
+
+Adding scripts to package.json:
+{
+  // ... other package.json stuff
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack serve",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
+  },
+  // ... other package.json stuff
+}
+
+npm run build = npx webpack
+npm run dev = npx webpack serve
+npm run deploy = git subtree push --prefix dist origin gh-pages
+find starting template on webpack template repo
